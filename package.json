@@ -1,0 +1,22 @@
+{
+  "name": "Zepto.fullPageScroll",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mc-zone/Zepto.fullPageScroll.git"
+  },
+  "author": "mc-zone",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mc-zone/Zepto.fullPageScroll/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.11.0"
+  }
+}
