@@ -10,26 +10,63 @@
         padding:0;
         margin:0;
     }
-    .page{
-        background:#ccc;
-        border:1px solid #000;
+    body{
+        height:500px;
+    }
+    .page:nth-child(1){
+        background:red;
+    }
+    .page:nth-child(2){
+        background:green;
+    }
+    .page:nth-child(3){
+        background:yellow;
+    }
+    .page:nth-child(4){
+        background:black;
+    }
+    #container2{
+        background:#fcfcfc;
     }
     </style>
 </head>
 <body>
 
     <div id="container">
-        <div class="page">1</div>
-        <div class="page">2</div>
-        <div class="page">3</div>
+        <div class="page">
+            <br>
+            p1
+            <div id="container2">
+                <div class="spage">sp1</div>
+                <div class="spage">sp2</div>
+                <div class="spage">sp3</div>
+            </div>
+        </div>
+        <div class="page">p2</div>
+        <div class="page">p3</div>
     </div>
 	
     <script type="text/javascript" src="../lib/zepto.js"></script>
     <script type="text/javascript" src="../zepto.fullPageScroll.js"></script>
     <script type="text/javascript">
     Zepto(function($){
-            var $container = $("#container");
-            $container.fullPageScroll({
+            $("#container").fullPageScroll({
+                pageSelector:".page",
+                beforeMove: function(page,index){
+                    console.log('beforeMove',page,index);
+                },    
+                afterMove:  function(page,index){
+                    console.log('afterMove',page,index);
+                }
+            });
+
+            $("#container2").fullPageScroll({
+                loop:false,
+                horizontal:true,
+                pageSelector:".spage",
+                height:200,
+                width:200,
+                pageCss:{"background":"#ccc"}
             });
     });
 
