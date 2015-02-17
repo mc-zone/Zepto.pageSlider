@@ -7,9 +7,10 @@
     var emptyFunction = function(){};
     var doAnimation = ( window.requestAnimationFrame || function(callback){ callback(); } );
     var easingAdd = function( $el,time,easing ){
-        var time = ( time || "400" ) + "ms",
-            easing = easing || "ease",
-            prop = [ "all",time,easing ].join(" ");
+        time = ( time || "400" ) + "ms";
+        easing = easing || "ease";
+
+        var prop = [ "all",time,easing ].join(" ");
 
         $el.css({
             "-webkit-transition": prop,
@@ -27,17 +28,24 @@
     var FullPageScroll = function( $ctn, config ){
         this.$ctn = $ctn;
         this.config = config;
-        this.timeId = 0;
+        this.moveTimeId = 0;
+        this.autoTimeId = 0;
 
         //取得pages 只取最近一层的元素
         $p1 = $ctn.find( config.pageSelector ).eq(0);
         this.$pages = $p1.add( $p1.siblings( config.pageSelector ) );
+
+        //一些参数过滤
+        if( this.config.autoSpeed < this.config.easingTime + 100 ){
+            this.config.autoSpeed = this.config.easingTime + 100;
+        }
     };
 
     //初始化
     FullPageScroll.prototype.init = function(){
         var $parent = this.$ctn.offsetParent(),  //父级
             $ctnInner = $( "<div class='full-page-scroll-inner' />" ), //创建一个inner层用来移动
+            that = this,
             ctnHeight = this.config.height, //容器高
             ctnWidth = this.config.width, //容器宽
             pageLen = this.$pages.length,
@@ -98,18 +106,18 @@
 
         if( this.config.horizontal ){
             //横版
-            innerProp["width"] = pageLen  + "00%";
-            innerProp["height"] = "100%";
+            innerProp.width = pageLen  + "00%";
+            innerProp.height = "100%";
 
-            pageProp["float"] = "left";
-            pageProp["height"] = "100%";
-            pageProp["width"] =  pagePercent + "%";
+            pageProp.float = "left";
+            pageProp.height = "100%";
+            pageProp.width = pagePercent + "%";
         }else{
-            innerProp["width"] = "100%";
-            innerProp["height"] = pageLen  + "00%";
+            innerProp.width = "100%";
+            innerProp.height = pageLen  + "00%";
 
-            pageProp["height"] =  pagePercent + "%";
-            pageProp["width"] = "100%";
+            pageProp.height = pagePercent + "%";
+            pageProp.width = "100%";
         }
 
         //DOM CSS 赋值
@@ -120,6 +128,7 @@
         });
 
         this.eventBind();
+
     };
 
     //事件绑定
@@ -136,6 +145,10 @@
             e.preventDefault();
             tStart = e.touches[0][ ref ];
             easingRemove( that.$ctnInner );
+
+            if( that.config.auto ){
+                window.clearTimeout(that.autoTimeId);
+            }
 
         });
         this.$ctn.on("touchmove",function(e){
@@ -163,11 +176,15 @@
             tAmount = 0;
             amountPercent = 0;
             ctnAmountPercent = 0;
+
+            if( that.config.auto ){
+                that.autoPlay();
+            }
         });
     };
 
     //移到下一个
-    FullPageScroll.prototype.moveNext = function(){
+    FullPageScroll.prototype.moveNext = function( isAuto ){
         var curPage = this.curPage,
             nextPage = curPage + 1;
 
@@ -179,11 +196,11 @@
             }
         }
 
-        this.moveTo( nextPage );
+        this.moveTo( nextPage, isAuto );
     };
 
     //移到前一个
-    FullPageScroll.prototype.movePrev = function(){
+    FullPageScroll.prototype.movePrev = function( isAuto ){
         var curPage = this.curPage,
             prevPage = curPage - 1;
 
@@ -195,13 +212,17 @@
             }
         }
 
-        this.moveTo( prevPage );
+        this.moveTo( prevPage, isAuto );
     };
 
     //移动到某一个page
-    FullPageScroll.prototype.moveTo = function( index ){
+    FullPageScroll.prototype.moveTo = function( index, isAuto ){
         var that = this,
             amountPercent;
+
+        if( !isAuto && that.config.auto ){
+            window.clearTimeout( that.autoTimeId );
+        }
 
         if( index < 0 || index > this.pageLen - 1 ){
             return false;
@@ -218,9 +239,13 @@
         
         //afterMove
         if( typeof this.config.afterMove == "function" ){
-            window.clearTimeout( this.timeId );
-            this.timeId = window.setTimeout(function(){
+            window.clearTimeout( this.moveTimeId );
+            this.moveTimeId = window.setTimeout(function(){
                 that.config.afterMove(that.$pages[index], index);
+
+                if( !isAuto && that.config.auto ){
+                    that.autoPlay();
+                }
             },this.config.easingTime);
         }
     };
@@ -245,6 +270,18 @@
                         "transform":translate
             });
         });
+    };
+
+    //位移操作
+    FullPageScroll.prototype.autoPlay = function(){
+        var that = this;
+        if( !this.config.auto ) return false;
+
+        window.clearTimeout( this.autoTimeId );
+        this.autoTimeId = window.setTimeout(function(){
+            that.moveNext( true );
+            that.autoPlay();
+        },this.config.autoSpeed);
 
     };
 
@@ -258,11 +295,10 @@
         loop:       true,     //是否循环播放
         percentThreshold: 10, //拉动超过百分比时翻页
         easing:     'ease-out',   //缓动函数 加在transition里
-        easingTime: '400',      //缓动延迟
+        easingTime: 400,      //缓动延迟
         pageCss:    {},         //page额外的css(不接受height,width,会被覆盖)
-
-        //TODO: prev, next
-
+        prevBtn:    null,
+        nextBtn:    null,
         beforeMove: emptyFunction,
         afterMove:  emptyFunction
     };
@@ -276,6 +312,23 @@
             var $el = $(el);
             var instance = new FullPageScroll( $el, config );
             instance.init();
+
+            //auto play
+            if( instance.config.auto ){
+                instance.autoPlay();
+            }
+
+            //control button
+            [ "prevBtn", "nextBtn" ].forEach(function(btn,idx){
+                var $btn = instance.config[ btn ];
+                if( $btn && $btn.length>0 ){
+                    var oper = 'move' + btn.replace('Btn', '').replace(/./, function(m){ return m[0].toUpperCase(); });
+                    $btn.on("touchend",function(){
+                        console.log(oper);
+                        instance[oper]();
+                    });
+                }
+            });
         });
     };
 

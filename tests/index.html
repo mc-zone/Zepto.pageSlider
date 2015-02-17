@@ -34,6 +34,7 @@
 
     <div id="container">
         <div class="page">
+            <button id="next">next!</button>
             <br>
             p1
             <div id="container2">
@@ -52,11 +53,16 @@
     Zepto(function($){
             $("#container").fullPageScroll({
                 pageSelector:".page",
+                auto:true,
+                autoSpeed:5000,
+                easeTime:500,
+                loop:false,
+                nextBtn:$("#next"),
                 beforeMove: function(page,index){
-                    console.log('beforeMove',page,index);
+                    //console.log('beforeMove',page,index);
                 },    
                 afterMove:  function(page,index){
-                    console.log('afterMove',page,index);
+                    //console.log('afterMove',page,index);
                 }
             });
 
