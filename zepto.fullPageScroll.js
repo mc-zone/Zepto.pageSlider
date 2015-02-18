@@ -11,7 +11,6 @@
         easing = easing || "ease";
 
         var prop = [ "all",time,easing ].join(" ");
-
         $el.css({
             "-webkit-transition": prop,
                     "transition": prop
@@ -128,7 +127,6 @@
         });
 
         this.eventBind();
-
     };
 
     //事件绑定
@@ -149,7 +147,6 @@
             if( that.config.auto ){
                 window.clearTimeout(that.autoTimeId);
             }
-
         });
         this.$ctn.on("touchmove",function(e){
             e.preventDefault();
@@ -181,6 +178,7 @@
                 that.autoPlay();
             }
         });
+
     };
 
     //移到下一个
@@ -230,7 +228,7 @@
 
         //beforeMove
         if( typeof this.config.beforeMove == "function" ){
-            that.config.beforeMove(this.$pages[index], index);
+            that.config.beforeMove(this.$pages.eq(index), index);
         }
 
         amountPercent = ( -1 * index * ( 100 / this.pageLen ) ) || 0;//不要-0
@@ -239,14 +237,22 @@
         
         //afterMove
         if( typeof this.config.afterMove == "function" ){
+            //TODO 需要带上 `transitionend` and `oTransitionEnd` and `otransitionend` 吗?
+            this.$ctnInner.one("webkitTransitionEnd",function(e){
+                that.config.afterMove(that.$pages.eq(index), index);
+                if( !isAuto && that.config.auto ){
+                    that.autoPlay();
+                }
+            });
+            /*
             window.clearTimeout( this.moveTimeId );
             this.moveTimeId = window.setTimeout(function(){
-                that.config.afterMove(that.$pages[index], index);
-
+                that.config.afterMove($(that.$pages[index]), index);
                 if( !isAuto && that.config.auto ){
                     that.autoPlay();
                 }
             },this.config.easingTime);
+            */
         }
     };
 
@@ -272,7 +278,7 @@
         });
     };
 
-    //位移操作
+    //自动播放
     FullPageScroll.prototype.autoPlay = function(){
         var that = this;
         if( !this.config.auto ) return false;
