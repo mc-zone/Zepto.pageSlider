@@ -82,7 +82,7 @@ $container.pageSlider({
 [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/)
 
 
-##compatibility
+##Compatibility
 
 (Only lists that have been tested. Welcome to make any issue. )
 - Android 4.1+
