@@ -6,11 +6,11 @@ module.exports = function(grunt){
 			options: {
 				specs:   'tests/spec/*.js'
 			},
-			fullPageScroll: {
-				src: ['zepto.fullPageScroll.js']
+			pageSlider: {
+				src: ['zepto.pageSlider.js']
 			},
-			fullPageScrollMin: {
-				src: ['zepto.fullPageScroll.min.js']
+			pageSliderMin: {
+				src: ['zepto.pageSlider.min.js']
 			}
 		},
 
@@ -20,13 +20,13 @@ module.exports = function(grunt){
 			},
 			main: {
 				files: {
-					'zepto.fullPageScroll.min.js': ['zepto.fullPageScroll.js']
+					'zepto.pageSlider.min.js': ['zepto.pageSlider.js']
 				}
 			}
 		},
 
 		jshint: {
-			all: ['Gruntfile.js', 'zepto.fullPageScroll.js']
+			all: ['Gruntfile.js', 'zepto.pageSlider.js']
 		}
 		
 		

@@ -1,5 +1,5 @@
 {
-  "name": "Zepto.fullPageScroll",
+  "name": "Zepto.pageSlider",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mc-zone/Zepto.fullPageScroll.git"
+    "url": "https://github.com/mc-zone/Zepto.pageSlider.git"
   },
   "author": "mc-zone",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mc-zone/Zepto.fullPageScroll/issues"
+    "url": "https://github.com/mc-zone/Zepto.pageSlider/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

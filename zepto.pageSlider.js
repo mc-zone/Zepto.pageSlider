@@ -23,8 +23,8 @@
         });
     };
 
-    //FullPageScroll
-    var FullPageScroll = function( $ctn, config ){
+    //PageSlider
+    var PageSlider = function( $ctn, config ){
         this.$ctn = $ctn;
         this.config = config;
         this.moveTimeId = 0;
@@ -41,9 +41,9 @@
     };
 
     //初始化
-    FullPageScroll.prototype.init = function(){
+    PageSlider.prototype.init = function(){
         var $parent = this.$ctn.offsetParent(),  //父级
-            $ctnInner = $( "<div class='full-page-scroll-inner' />" ), //创建一个inner层用来移动
+            $ctnInner = $( "<div class='page-slider-inner' />" ), //创建一个inner层用来移动
             that = this,
             ctnHeight = this.config.height, //容器高
             ctnWidth = this.config.width, //容器宽
@@ -130,7 +130,7 @@
     };
 
     //事件绑定
-    FullPageScroll.prototype.eventBind = function(){
+    PageSlider.prototype.eventBind = function(){
         var that = this,
             ref = ( this.config.horizontal ? 'clientX' : 'clientY' ),
             area = ( this.config.horizontal ? this.ctnWidth : this.ctnHeight ),
@@ -182,7 +182,7 @@
     };
 
     //移到下一个
-    FullPageScroll.prototype.moveNext = function( isAuto ){
+    PageSlider.prototype.moveNext = function( isAuto ){
         var curPage = this.curPage,
             nextPage = curPage + 1;
 
@@ -198,7 +198,7 @@
     };
 
     //移到前一个
-    FullPageScroll.prototype.movePrev = function( isAuto ){
+    PageSlider.prototype.movePrev = function( isAuto ){
         var curPage = this.curPage,
             prevPage = curPage - 1;
 
@@ -214,7 +214,7 @@
     };
 
     //移动到某一个page
-    FullPageScroll.prototype.moveTo = function( index, isAuto ){
+    PageSlider.prototype.moveTo = function( index, isAuto ){
         var that = this,
             amountPercent;
 
@@ -257,14 +257,14 @@
     };
 
     //复位移动
-    FullPageScroll.prototype.moveReset = function(){
+    PageSlider.prototype.moveReset = function(){
         var amountPercent = ( -1 * this.curPage * ( 100 / this.pageLen ) ) || 0;
 
         this.innerMove( amountPercent );
     };
 
     //位移操作
-    FullPageScroll.prototype.innerMove = function( amount ){
+    PageSlider.prototype.innerMove = function( amount ){
         var that = this,
             translate = ( this.config.horizontal ?
                 "translate3d(" + amount + "%, 0, 0)" :
@@ -279,7 +279,7 @@
     };
 
     //自动播放
-    FullPageScroll.prototype.autoPlay = function(){
+    PageSlider.prototype.autoPlay = function(){
         var that = this;
         if( !this.config.auto ) return false;
 
@@ -293,8 +293,8 @@
 
     var defaults = {
         pageSelector: ".page",
-        height:     null,   //默认为视口高。可传入百分比（按父级高度百分比）,或px
-        width:      null,   //默认为视口高。可传入百分比（按父级高度百分比）,或px
+        height:     null,   //默认为window高。可传入百分比（按父级百分比）,或px
+        width:      null,   //默认为window宽。可传入百分比（按父级百分比）,或px
         horizontal: false,  //默认为竖直排布scroll，可以水平
         autoSpeed:  5000,   //自动播放速度
         auto:       false,  //是否自动播放
@@ -310,13 +310,13 @@
     };
 
     //fn extend
-    $.fn.fullPageScroll = function( parameters ){
+    $.fn.pageSlider = function( parameters ){
         var config = $.extend( true, {}, defaults, parameters );
 
         return this.each(function( idx, el ){
-            //实例化FullPageScroll
+            //实例化PageSlider
             var $el = $(el);
-            var instance = new FullPageScroll( $el, config );
+            var instance = new PageSlider( $el, config );
             instance.init();
 
             //auto play
