@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Zepto.pageSlider Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    
+    <style type="text/css">
+    *{
+        padding:0;
+        margin:0;
+    }
+    html,body{
+        width:100%;
+        height:100%;
+        overflow:hidden;
+    }
+    .container{
+        float:left;
+    }
+    #container1{
+        background:black;
+    }
+    #container2{
+        background:white;
+    }
+    #container3{
+        background:gray;
+    }
+
+    #container1 .page:nth-child(2n+1){
+        background:orange;
+    }
+    #container1 .page:nth-child(2n){
+        background:green;
+    }
+    #container2 .page:nth-child(2n+1){
+        background:purple;
+    }
+    #container2 .page:nth-child(2n){
+        background:silver;
+    }
+    #container3 .page:nth-child(2n+1){
+        background:olive;
+    }
+    #container3 .page:nth-child(2n){
+        background:teal;
+    }
+    .page h1{
+        position:absolute;
+        top:45%;
+        left:0;
+        width:100%;
+        font-size:30px;
+        color:#fff;
+        text-align:center;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="container1" class="container">
+        <div class="page">
+            <h1>vertical <br>page 1</h1>
+        </div>
+        <div class="page">
+            <h1>page 2</h1>
+        </div>
+        <div class="page">
+            <h1>page 3</h1>
+        </div>
+    </div>
+
+    <div id="container2" class="container">
+        <div class="page">
+            <h1>horizontal <br>page 1</h1>
+        </div>
+        <div class="page">
+            <h1>page 2</h1>
+        </div>
+        <div class="page">
+            <h1>page 3</h1>
+        </div>
+    </div>
+
+    <div id="container3" class="container">
+        <div class="page">
+            <h1>vertical
+                <br>
+                page 1
+                <br>
+                loop
+            </h1>
+        </div>
+        <div class="page">
+            <h1>page 2</h1>
+        </div>
+        <div class="page">
+            <h1>page 3</h1>
+        </div>
+    </div>
+	
+<script type="text/javascript" src="../lib/zepto.min.js"></script>
+<script type="text/javascript" src="https://raw.githubusercontent.com/mc-zone/Zepto.pageSlider/master/zepto.pageSlider.min.js"></script>
+
+<script type="text/javascript">
+Zepto(function($){
+        $("#container1").pageSlider({
+            width:'50%',
+            loop:false
+        });
+
+        $("#container2").pageSlider({
+            width:'50%',
+            height:'50%',
+            loop:false,
+            horizontal:true
+        });
+
+        $("#container3").pageSlider({
+            width:'50%',
+            height:'50%',
+            loop:true
+        });
+});
+
+</script>
+</body>
+</html>
