@@ -47,8 +47,7 @@ Zepto(function($){
 });
 	
 </script>
-
-```js
+```
 
 
 ##可选参数默认值
@@ -76,7 +75,7 @@ $container.pageSlider({
 ##注意
 
 - 请自行设置页面的`css reset` （例如取消`padding`和`margin`，特别是全屏scroll时。插件有多种使用方式，因此没有加入全局的 style sheet )。 
-- 同一页面中可存在多个scroll实例，也可叠加存在（即一个实例中包含另一个或多个）。分别实例化即可。详见 `examples` .
+- 同一页面中可存在多个scroll实例，也可叠加存在（即一个实例中包含另一个或多个）。分别实例化即可。详见 [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/) 。
 
 ##更多例子
 
@@ -85,7 +84,7 @@ $container.pageSlider({
 
 ##兼容性
 
-(手上机型有限只列出已测试的。欢迎提交 issue )
+(机型有限，只列出已测试的。欢迎提交 issue )
 - Android 4.1+
 - iOS 6+
 

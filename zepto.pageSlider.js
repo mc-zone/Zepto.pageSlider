@@ -132,16 +132,18 @@
     //事件绑定
     PageSlider.prototype.eventBind = function(){
         var that = this,
-            ref = ( this.config.horizontal ? 'clientX' : 'clientY' ),
-            area = ( this.config.horizontal ? this.ctnWidth : this.ctnHeight ),
-            tStart,
-            tAmount,
+            ref = ( this.config.horizontal ? 'X' : 'Y' ),
+            area = { X:this.ctnWidth, Y:this.ctnHeight },
+            tStart = { X:0, Y:0 },
+            tAmount = { X:0, Y:0 },
             amountPercent,
             ctnAmountPercent;
 
         this.$ctn.on("touchstart",function(e){
             e.preventDefault();
-            tStart = e.touches[0][ ref ];
+            tStart.X = e.touches[0].clientX;
+            tStart.Y = e.touches[0].clientY;
+
             easingRemove( that.$ctnInner );
 
             if( that.config.auto ){
@@ -150,13 +152,20 @@
         });
         this.$ctn.on("touchmove",function(e){
             e.preventDefault();
-            e.stopPropagation();
-            tAmount = e.changedTouches[0][ ref ] - tStart;
-            //对于ctn的位移比例
-            ctnAmountPercent = tAmount/area * 100;
-            //移动使用对于放大后的ctnInner的位移比例
-            amountPercent = -1 * that.curPage * that.pagePercent + ctnAmountPercent/that.pageLen;
-            that.innerMove( amountPercent );
+            tAmount.X = e.changedTouches[0].clientX - tStart.X;
+            tAmount.Y = e.changedTouches[0].clientY - tStart.Y;
+
+            //判断是处理还是继续冒泡，支持嵌套结构
+            if( ( Math.abs(tAmount.Y) > Math.abs(tAmount.X) && ref == 'Y' ) || ( Math.abs(tAmount.X) > Math.abs(tAmount.Y) && ref == 'X' ) ){
+                //处理
+                e.stopPropagation();
+                //对于ctn的位移比例
+                ctnAmountPercent = tAmount[ref]/area[ref] * 100;
+                //移动使用对于放大后的ctnInner的位移比例
+                amountPercent = -1 * that.curPage * that.pagePercent + ctnAmountPercent/that.pageLen;
+                that.innerMove( amountPercent );
+            }
+
         });
         this.$ctn.on("touchend touchcancel",function(e){
             e.preventDefault();
@@ -169,8 +178,10 @@
                 that.moveReset();
             }
 
-            tStart = 0;
-            tAmount = 0;
+            tStart.X = 0;
+            tStart.Y = 0;
+            tAmount.X = 0;
+            tAmount.Y = 0;
             amountPercent = 0;
             ctnAmountPercent = 0;
 

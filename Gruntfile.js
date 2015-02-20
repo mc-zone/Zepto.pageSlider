@@ -2,6 +2,7 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+        /*
 		jasmine: {
 			options: {
 				specs:   'tests/spec/*.js'
@@ -13,6 +14,7 @@ module.exports = function(grunt){
 				src: ['zepto.pageSlider.min.js']
 			}
 		},
+        */
 
 		uglify: {
 			options: {
@@ -32,11 +34,11 @@ module.exports = function(grunt){
 		
 	});
 
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
+    //grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default',['uglify','jasmine','jshint']);
+    grunt.registerTask('default',['uglify', 'jshint', /*'jasmine'*/]);
     grunt.registerTask('hint',['jshint']);
 };
 

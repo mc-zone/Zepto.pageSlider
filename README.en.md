@@ -47,8 +47,7 @@ Zepto(function($){
 });
 	
 </script>
-
-```js
+```
 
 
 ##Optional Parameters (and Default Setting)
@@ -76,7 +75,7 @@ $container.pageSlider({
 ##Tips
 
 - Do `css reset` by self. Such as `padding` and `margin` reset for `container`. Because of different possible usage, there is no global style sheet. 
-- A page can have more than one instance. Even be included with another. Can see `examples`.
+- A page can have more than one instance. Even be included with another. Can see [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/).
 
 ##More Examples
 
