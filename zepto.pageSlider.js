@@ -69,7 +69,7 @@
         this.curPage = curPage;
         this.pagePercent = pagePercent;
 
-        //容器 DOM 设定
+        //容器 css 设定
         this.$ctn.css({
             "position": "relative",
             "width":    ctnWidth,
@@ -82,7 +82,7 @@
         this.ctnHeight = ctnHeight;
         this.ctnWidth = ctnWidth;
 
-        //移动层 DOM 设定
+        //移动层 css
         var innerProp = {
             "position": "absolute",
             "top":      0,
@@ -91,7 +91,7 @@
             "height":   pageLen  + "00%",
             "overflow": "hidden"
         }; 
-        //page DOM 设定
+        //page css
         var pageProp = {
                 "position": "relative",
                 "display":  "block"
@@ -104,7 +104,7 @@
         }
 
         if( this.config.horizontal ){
-            //横版
+            //horizontal
             innerProp.width = pageLen  + "00%";
             innerProp.height = "100%";
 
@@ -119,7 +119,7 @@
             pageProp.width = "100%";
         }
 
-        //DOM CSS 赋值
+        //CSS 设定
         $ctnInner.css( innerProp );
         easingAdd( $ctnInner, this.config.easingTime, this.config.easing );
         this.$pages.wrapAll( $ctnInner ).each(function(){
@@ -157,7 +157,6 @@
 
             //判断是处理还是继续冒泡，支持嵌套结构
             if( ( Math.abs(tAmount.Y) > Math.abs(tAmount.X) && ref == 'Y' ) || ( Math.abs(tAmount.X) > Math.abs(tAmount.Y) && ref == 'X' ) ){
-                //处理
                 e.stopPropagation();
                 //对于ctn的位移比例
                 ctnAmountPercent = tAmount[ref]/area[ref] * 100;
@@ -165,7 +164,6 @@
                 amountPercent = -1 * that.curPage * that.pagePercent + ctnAmountPercent/that.pageLen;
                 that.innerMove( amountPercent );
             }
-
         });
         this.$ctn.on("touchend touchcancel",function(e){
             e.preventDefault();
@@ -341,7 +339,6 @@
                 if( $btn && $btn.length>0 ){
                     var oper = 'move' + btn.replace('Btn', '').replace(/./, function(m){ return m[0].toUpperCase(); });
                     $btn.on("touchend",function(){
-                        console.log(oper);
                         instance[oper]();
                     });
                 }
