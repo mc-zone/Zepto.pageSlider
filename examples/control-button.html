@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Zepto.pageSlider Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <style type="text/css">
+    /* Custom CSS (No specified). */
+    /* 这里的CSS仅为示例，非插件的一部分 */
+    *{
+        padding:0;
+        margin:0;
+    }
+    .page:nth-child(1){
+        background:orange;
+    }
+    .page:nth-child(2){
+        background:green;
+    }
+    .page:nth-child(3){
+        background:gold;
+    }
+    .page:nth-child(4){
+        background:black;
+    }
+
+    .page h1{
+        position:absolute;
+        top:45%;
+        left:0;
+        width:100%;
+        font-size:40px;
+        color:#fff;
+        text-align:center;
+    }
+    .page h1 small{
+        font-size:20px;
+    }
+
+    a.arrow{
+        position: absolute;
+        width:30px;
+        height: 30px;
+        padding:15px;
+        top:45%;
+        background-position: center;
+        background-repeat: no-repeat;
+        -webkit-background-size: 30px;
+        background-size: 30px;
+        opacity: 0;
+        z-index:999;
+    }
+    #prevBtn{
+        left:15px;
+        background-image:url(../images/arrow-left.png);
+        -webkit-animation: fadeOutLeft 1.8s ease-out .3s infinite ;
+                animation: fadeOutLeft 1.8s ease-out .3s infinite ;
+    }
+    #nextBtn{
+        right:15px;
+        background-image:url(../images/arrow-right.png);
+        -webkit-animation: fadeOutRight 1.8s ease-out .3s infinite ;
+                animation: fadeOutRight 1.8s ease-out .3s infinite ;
+    }
+
+    @-webkit-keyframes fadeOutLeft {
+      0% { opacity: 1; }
+      100% {
+        opacity: 0;
+        -webkit-transform: translate3d(-40%, 0, 0);
+                transform: translate3d(-40%, 0, 0);
+      }
+    }
+    @keyframes fadeOutLeft {
+      0% {  opacity: 1; }
+      100% {
+        opacity: 0;
+        -webkit-transform: translate3d(-40%, 0, 0);
+                transform: translate3d(-40%, 0, 0);
+      }
+    }
+    @-webkit-keyframes fadeOutRight {
+      0% { opacity: 1; }
+      100% {
+        opacity: 0;
+        -webkit-transform: translate3d(40%, 0, 0);
+                transform: translate3d(40%, 0, 0);
+      }
+    }
+    @keyframes fadeOutRight {
+      0% {  opacity: 1; }
+      100% {
+        opacity: 0;
+        -webkit-transform: translate3d(40%, 0, 0);
+                transform: translate3d(40%, 0, 0);
+      }
+    }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="page">
+            <h1>
+                page 1<br>
+                <small>Tap arrows to turn the page.</small>
+            </h1>
+        </div>
+        <div class="page">
+            <h1>page 2</h1>
+        </div>
+        <div class="page">
+            <h1>page 3</h1>
+        </div>
+        <div class="page">
+            <h1>page 4</h1>
+        </div>
+
+        <div class="control-row"> 
+            <a href="#" id="nextBtn" class="arrow"></a>
+            <a href="#" id="prevBtn" class="arrow"></a>
+        </div>
+
+    </div>
+
+<script type="text/javascript" src="../lib/zepto.min.js"></script>
+<script type="text/javascript" src="../zepto.pageSlider.min.js"></script>
+
+<script type="text/javascript">
+Zepto(function($){
+  $("#container").pageSlider({
+      pageSelector:".page",
+      horizontal:true,
+      prevBtn:$("#prevBtn"),
+      nextBtn:$("#nextBtn")
+  });
+});
+
+</script>
+</body>
+</html>

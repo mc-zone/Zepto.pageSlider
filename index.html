@@ -25,7 +25,7 @@
             Browsing on mobile phone for real effect.
             </p>
             <p>
-            使用手机浏览真实效果。
+            建议使用手机浏览真实效果。
             </p>
         </div>
     </div>
@@ -36,12 +36,14 @@
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <div class="media-object qrcode" data-link="http://mc-zone.github.io/Zepto.pageSlider/examples/simple.html" ></div>
+                        <div class="media-object qrcode" ></div>
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">Simple</h4>
-                    <p>简单示例</p>
+                    <p>
+                    <a class="btn btn-success" href="examples/simple.html">简单示例</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -52,12 +54,14 @@
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <div class="media-object qrcode" data-link="http://mc-zone.github.io/Zepto.pageSlider/examples/simple-horizontal.html" ></div>
+                        <div class="media-object qrcode" ></div>
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">Horizontal</h4>
-                    <p>示例-横向滑动</p>
+                    <p>
+                        <a class="btn btn-success" href="examples/simple-horizontal.html">示例-横向滑动</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -68,12 +72,14 @@
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <div class="media-object qrcode" data-link="http://mc-zone.github.io/Zepto.pageSlider/examples/multiple.html" ></div>
+                        <div class="media-object qrcode" ></div>
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">Multiple</h4>
-                    <p>示例-建立多个</p>
+                    <p>
+                        <a class="btn btn-success" href="examples/multiple.html">示例-建立多个</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -84,12 +90,50 @@
             <div class="media">
                 <div class="media-left">
                     <a href="#">
-                        <div class="media-object qrcode" data-link="http://mc-zone.github.io/Zepto.pageSlider/examples/include.html" ></div>
+                        <div class="media-object qrcode" ></div>
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">Include</h4>
-                    <p>示例-包含</p>
+                    <p>
+                        <a class="btn btn-success" href="examples/include.html">示例-多个包含</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- media end -->
+
+         <!-- media begin -->
+        <div class="col-sm-6">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <div class="media-object qrcode" ></div>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Control Button</h4>
+                    <p>
+                        <a class="btn btn-success" href="examples/control-button.html">示例-翻页按钮</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- media end -->
+
+        <!-- media begin -->
+        <div class="col-sm-6">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <div class="media-object qrcode" ></div>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">Autoplay</h4>
+                    <p>
+                        <a class="btn btn-success" href="examples/autoplay.html">示例-自动播放</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -104,12 +148,14 @@
 <script type="text/javascript" src="lib/jquery-qrcode/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
 $(function(){
+    var pageSite = "http://mc-zone.github.io/Zepto.pageSlider/";
     $(".media").each(function(){
         var $qr = $(this).find(".qrcode");
+        var url = pageSite + $(this).find(".media-body a.btn:first").attr("href");
         $qr.qrcode({
             width:150,
             height:150,
-            text:$qr.data('link')
+            text:url
         });
     });
 });
