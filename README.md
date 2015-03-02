@@ -16,7 +16,7 @@ step.1 引入 zpeto.js 及插件
 <script type="text/javascript" src="path/to/zepto.pageSlider.js"></script>
 ```
 
-step.2 HTML
+step.2 HTML Element
 
 ```HTML
 <div id="container">
@@ -40,7 +40,6 @@ step.3 初始化
 Zepto(function($){
     var $container = $("#container");
     $container.pageSlider({
-        horizontal:false,
         loop:false,
         easingTime:600
     });
@@ -50,7 +49,7 @@ Zepto(function($){
 ```
 
 
-##可选参数默认值
+##可选参数及默认值
 
 ```js
 $container.pageSlider({
@@ -74,8 +73,8 @@ $container.pageSlider({
 
 ##注意
 
-- 请自行设置页面的`css reset` （例如取消`padding`和`margin`，特别是全屏scroll时。插件有多种使用方式，因此没有加入全局的 style sheet )。 
-- 同一页面中可存在多个scroll实例，也可叠加存在（即一个实例中包含另一个或多个）。分别实例化即可。详见 [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/) 。
+- 请自行设置页面的`css reset` （例如取消 body 的`padding`和`margin`，特别是全屏 slider 时。插件有多种使用方式，因此没有加入全局的 style sheet )。 
+- 同一页面中可以存在多个不同的 slider 实例，也可叠加存在（即一个实例中包含另一个或多个）。分别实例化即可。详见 [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/) 。
 
 ##更多例子
 
@@ -84,8 +83,8 @@ $container.pageSlider({
 
 ##兼容性
 
-(机型有限，只列出已测试的。欢迎提交 issue )
-- Android 4.1+
+( 真机测试机型有限。欢迎提交 issue )
+- Android 2.3+
 - iOS 6+
 
 ## 欢迎PR !

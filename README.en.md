@@ -16,7 +16,7 @@ step.1 Import Scripts
 <script type="text/javascript" src="path/to/zepto.pageSlider.js"></script>
 ```
 
-step.2 HTML
+step.2 HTML Element
 
 ```HTML
 <div id="container">
@@ -40,7 +40,6 @@ step.3 Initialization
 Zepto(function($){
     var $container = $("#container");
     $container.pageSlider({
-        horizontal:false,
         loop:false,
         easingTime:600
     });
@@ -74,8 +73,8 @@ $container.pageSlider({
 
 ##Tips
 
-- Do `css reset` by self. Such as `padding` and `margin` reset for `container`. Because of different possible usage, there is no global style sheet. 
-- A page can have more than one instance. Even be included with another. Can see [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/).
+- Do `css reset` by self. Such as `padding` and `margin` reset for body and container. Because of different possible usage, there is no global style sheet. 
+- A page can have more than one and different instances. Even be included with another. See [examples](https://github.com/mc-zone/Zepto.pageSlider/tree/master/examples/).
 
 ##More Examples
 
@@ -85,7 +84,7 @@ $container.pageSlider({
 ##Compatibility
 
 (Only lists that have been tested. Welcome to make any issue. )
-- Android 4.1+
+- Android 2.3+
 - iOS 6+
 
 ## Look forward to your PR !
