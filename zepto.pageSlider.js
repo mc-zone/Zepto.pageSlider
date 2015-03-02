@@ -4,8 +4,8 @@
     }
 
     /* Global literals */
-    // Android 4.1 supported translate3d
-    var useCssTransform = ( /Android 2|Android 3|Android 4\.0/i.test(window.navigator.userAgent) ? false : true );
+    // Android 2 not supported 3D transform
+    var useCssTransform3D = ( /Android 2/i.test(window.navigator.userAgent) ? false : true );
 
     /* Common functions */
     var emptyFunction = function(){};
@@ -250,23 +250,23 @@
         
         //afterMove
         if( typeof this.config.afterMove == "function" ){
-            if( useCssTransform ){
-                //TODO 需要带上 `transitionend` and `oTransitionEnd` and `otransitionend` 吗?
-                this.$ctnInner.one("webkitTransitionEnd",function(e){
-                    that.config.afterMove(that.$pages.eq(index), index);
-                    if( !isAuto && that.config.auto ){
-                        that.autoPlay();
-                    }
-                });
-            }else{
-                window.clearTimeout( this.afterMoveTimeId );
-                this.afterMoveTimeId = window.setTimeout(function(){
-                    that.config.afterMove($(that.$pages[index]), index);
-                    if( !isAuto && that.config.auto ){
-                        that.autoPlay();
-                    }
-                },this.config.easingTime);
-            }
+            //TODO 需要带上 `transitionend` and `oTransitionEnd` and `otransitionend` 吗?
+            this.$ctnInner.one("webkitTransitionEnd",function(e){
+                that.config.afterMove(that.$pages.eq(index), index);
+                if( !isAuto && that.config.auto ){
+                    that.autoPlay();
+                }
+            });
+
+            /*
+            window.clearTimeout( this.afterMoveTimeId );
+            this.afterMoveTimeId = window.setTimeout(function(){
+                that.config.afterMove($(that.$pages[index]), index);
+                if( !isAuto && that.config.auto ){
+                    that.autoPlay();
+                }
+            },this.config.easingTime);
+            */
         }
     };
 
@@ -280,20 +280,28 @@
     //位移操作
     PageSlider.prototype.innerMove = function( amount ){
         var that = this,
+            translate,
             applyCss;
 
-        if( useCssTransform ){
-            var translate = ( this.config.horizontal ?
+        if( useCssTransform3D ){
+            translate = ( this.config.horizontal ?
                 "translate3d(" + amount + "%, 0, 0)" :
                 "translate3d(0, " + amount + "%, 0)" );
-            applyCss = {
-                "-webkit-transform":translate,
-                        "transform":translate
-            };
+        }else{
+            translate = ( this.config.horizontal ?
+                "translate(" + amount + "%, 0)" :
+                "translate(0, " + amount + "%)" );
+        }
+        /*
         }else{
             var applyAmount = amount * that.pageLen + "%";
             applyCss = ( this.config.horizontal ? { left: applyAmount } : { top: applyAmount } );
         }
+        */
+        applyCss = {
+            "-webkit-transform":translate,
+                    "transform":translate
+        };
         doAnimation(function(){
             that.$ctnInner.css(applyCss);
         });
