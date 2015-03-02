@@ -4,9 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Zepto.pageSlider Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    
     <style type="text/css">
-    /* Custom CSS (No specified). */
-    /* 这里的CSS仅为示例，非插件的一部分 */
     *{
         padding:0;
         margin:0;
@@ -33,6 +32,9 @@
         color:#fff;
         text-align:center;
     }
+    .page h1 small{
+        font-size:20px;
+    }
     </style>
 </head>
 <body>
@@ -40,21 +42,19 @@
     <div id="container">
         <div class="page">
             <h1>
-                page 1<br>
-               <small>Swipe up to next</small> 
+                Page 1<br>
+                Autoplay<br>
+                <small>Speed = 2s</small>
             </h1>
         </div>
         <div class="page">
-            <h1>page 2</h1>
+            <h1>Page 2</h1>
         </div>
         <div class="page">
-            <h1>page 3</h1>
+            <h1>Page 3</h1>
         </div>
         <div class="page">
-            <h1>
-                page 4 <br>
-                <small>Swipe down to back</small> 
-            </h1>
+            <h1>Page 4</h1>
         </div>
     </div>
 
@@ -65,7 +65,8 @@
 Zepto(function($){
   $("#container").pageSlider({
       pageSelector:".page",
-      loop:false
+      auto:true,
+      autoSpeed:2000
   });
 });
 

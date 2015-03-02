@@ -44,57 +44,67 @@
         color:#fff;
         text-align:center;
     }
+    .page h1 small{
+        font-size:18px;
+    }
     </style>
 </head>
 <body>
 
     <div id="container1">
         <div class="page">
-            <h1>page 1</h1>
+            <h1>Main slider<br>
+                Page 1
+            </h1>
             <div id="container1-1">
                 <div class="page">
-                    <h1>included <br>
-                        page 1-1</h1>
+                    <h1> Included <br>
+                        Page 1-1</h1>
                 </div>
                 <div class="page">
-                    <h1>page 1-2</h1>
+                    <h1>Page 1-2</h1>
                 </div>
                 <div class="page">
-                    <h1>page 1-3</h1>
+                    <h1>Page 1-3</h1>
                 </div>
             </div>
         </div>
         <div class="page">
             <div id="container2-1">
                 <div class="page">
-                    <h1>
-                    <h1>full included! <br>
-                        horizontal now! <br>
-                        page 2-1</h1>
+                    <h1>New slider included<br>
+                        Page 2-1<br>
+                        <small>This is a horizontal slider.</small><br>
+                        <small>Swipe left/right to turn pages.</small><br>
+                        <small>Or swipe up/down to continue.</small>
+                    </h1>
                 </div>
                 <div class="page">
-                    <h1>page 2-2</h1>
+                    <h1>Page 2-2</h1>
                 </div>
                 <div class="page">
-                    <h1>page 2-3</h1>
+                    <h1>Page 2-3</h1>
                 </div>
             </div>
         </div>
         <div class="page">
             <h1>
-                <h1>back to vertical <br>
-                page 3</h1>
+                <h1>Main slider<br>
+                Page 3
+            </h1>
         </div>
         <div class="page">
-            <h1>page 4</h1>
+            <h1><h1>Main slider<br>
+                Page 4
+            </h1>
         </div>
     </div>
 
-<script type="text/javascript" src="../lib/zepto.js"></script>
-<script type="text/javascript" src="../zepto.pageSlider.js"></script>
+<script type="text/javascript" src="../lib/zepto.min.js"></script>
+<script type="text/javascript" src="../zepto.pageSlider.min.js"></script>
 <script type="text/javascript">
 Zepto(function($){
-  $("#container1").pageSlider();
+  $("#container1").pageSlider({ loop:false });
   $("#container1-1").pageSlider({
       width:"40%",
       height:"30%"
