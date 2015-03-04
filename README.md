@@ -66,8 +66,8 @@ $container.pageSlider({
     pageCss:    {},         //page额外的css(不接受height,width,会被覆盖)
     prevBtn:    null,       //向前翻页按钮
     nextBtn:    null,       //向后翻页按钮
-    beforeMove: function($page,index){}, //翻页前callback
-    afterMove:  function($page,index){}  //翻页后callback
+    beforeMove: function($currentPage, $toPage, toIndex){}, //翻页前callback
+    afterMove:  function($fromPage, $currentPage, currentIndex){}  //翻页后callback
 });
 ```
 

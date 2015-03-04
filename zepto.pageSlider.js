@@ -229,7 +229,8 @@
     //移动到某一个page
     PageSlider.prototype.moveTo = function( index, isAuto ){
         var that = this,
-            amountPercent;
+            amountPercent,
+            $currentPage = that.$pages.eq(this.curPage);
 
         if( !isAuto && that.config.auto ){
             window.clearTimeout( that.autoTimeId );
@@ -241,7 +242,7 @@
 
         //beforeMove
         if( typeof this.config.beforeMove == "function" ){
-            that.config.beforeMove(this.$pages.eq(index), index);
+            that.config.beforeMove($currentPage, this.$pages.eq(index), index);
         }
 
         amountPercent = ( -1 * index * ( 100 / this.pageLen ) ) || 0;//不要-0
@@ -252,7 +253,7 @@
         if( typeof this.config.afterMove == "function" ){
             //TODO 需要带上 `transitionend` and `oTransitionEnd` and `otransitionend` 吗?
             this.$ctnInner.one("webkitTransitionEnd",function(e){
-                that.config.afterMove(that.$pages.eq(index), index);
+                that.config.afterMove($currentPage, that.$pages.eq(index), index);
                 if( !isAuto && that.config.auto ){
                     that.autoPlay();
                 }

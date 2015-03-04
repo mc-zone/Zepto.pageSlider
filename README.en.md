@@ -66,8 +66,8 @@ $container.pageSlider({
     pageCss:    {},         //additional css for pages (no height and width)
     prevBtn:    null,       //prev button
     nextBtn:    null,       //next button
-    beforeMove: function($page,index){}, //callback on beforeScroll
-    afterMove:  function($page,index){}  //callback on afterScroll
+    beforeMove: function($currentPage, $toPage, toIndex){}, //callback on beforeMove
+    afterMove:  function($fromPage, $currentPage, currentIndex){}  //callback on afterMove
 });
 ```
 
