@@ -144,7 +144,7 @@
             ctnAmountPercent;
 
         this.$ctn.on("touchstart",function(e){
-            e.preventDefault();
+            //e.preventDefault();
             tStart.X = e.touches[0].clientX;
             tStart.Y = e.touches[0].clientY;
 
@@ -170,7 +170,7 @@
             }
         });
         this.$ctn.on("touchend touchcancel",function(e){
-            e.preventDefault();
+            //e.preventDefault();
             easingAdd( that.$ctnInner, that.config.easingTime, that.config.easing );
             if( ctnAmountPercent >= that.config.percentThreshold ){
                 that.movePrev();
